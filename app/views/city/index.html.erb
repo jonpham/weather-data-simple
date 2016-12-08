@@ -1,3 +1,35 @@
 <h1>Weather Data for <%= @data['location']['city'] %></h1>
 
 
+
+<h2>Five Day Forecast</h2>
+
+<div class="forecast">
+  <ul style="display: inline">
+  <% 5.times do |i| %>
+    <li style="display: inline">
+      <table><tr><td>
+      <div>Date : <%= @forecast[i]['date'] %></div>
+      <div>Temp Low : <%= @forecast[i]['low'] %></div>
+      <div>Temp High : <%= @forecast[i]['high'] %></div>
+      <div>Description : <%= @forecast[i]['text'] %></div>
+      </td></tr></table>
+    </li>
+  <% end %>
+  </ul>
+</div>
+
+<h3>Get Data from a New City</h3>
+
+<%= form_tag '/create' ,method: :post do %>
+  <%= label_tag :city, 'City : ' %>
+  <%= text_field_tag :input_city %>
+  <%= label_tag :state, "State : " %>
+  <%= text_field_tag :input_state %>
+  <%= submit_tag 'Get New Weather Data.' %>
+<% end %>
+
+
+
+
+
