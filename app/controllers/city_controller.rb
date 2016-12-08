@@ -1,20 +1,14 @@
 class CityController < ApplicationController
   
   def index
-    if @location == nil
-      @location = {city:'nome',state: 'ak'}
-    end
-    @data = get_weather_data(@location)
-    # data['location']['city']
-    @forecast = @data['item']['forecast']
-  end
+    city = (params[:city])? params[:city] : 'nome'
+    state = params[:state] ? params[:state] : 'ak'
 
-  def create
-    @location = {city: params[:input_city], state: params[:input_state]}
-    @data = get_weather_data(@location)
-    # data['location']['city']
+    location = {city:city,state: state}
+    # raise CHECK
+    @data = get_weather_data(location)
+    @current_weather = @data['item']['condition']
     @forecast = @data['item']['forecast']
-    render :index
   end
 
   def get_weather_data(location_hash)
